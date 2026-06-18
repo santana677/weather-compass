@@ -1,0 +1,12 @@
+{% extends 'weather/base.html' %}
+
+{% block content %}
+<h1>Выберите город для просмотра погоды</h1>
+<ul class="list-group">
+    {% for city in cities %}
+        <li class="list-group-item">
+            <a href="{% url 'city_detail' city.id %}">{{ city.name }}, {{ city.country }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'weather/base.html' %}
+
+{% block content %}
+<h1>{{ city.name }}, {{ city.country }}</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Температура (°C)</th>
+            <th>Влажность (%)</th>
+            <th>Ветер (м/с)</th>
+            <th>Описание</th>
+            <th>Комфорт</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.date }}</td>
+            <td>{{ record.temp }}</td>
+            <td>{{ record.humidity }}</td>
+            <td>{{ record.wind_speed }}</td>
+            <td>{{ record.description }}</td>
+            <td>
+                {% if record.comfort %}
+                    <span title="Индекс: {{ record.comfort.comfort_index|floatformat:1 }}">
+                        {% if record.comfort.rating == 'excellent' %}☀️ Отлично
+                        {% elif record.comfort.rating == 'good' %}😊 Хорошо
+                        {% elif record.comfort.rating == 'average' %}🌤 Средне
+                        {% elif record.comfort.rating == 'poor' %}🌧 Плохо
+                        {% endif %}
+                    </span>
+                {% else %}
+                    Нет данных
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if chart %}
+    <h3>График температуры</h3>
+    <img src="data:image/png;base64,{{ chart }}" alt="График температуры" class="img-fluid">
+{% endif %}
+
+<a href="{% url 'home' %}" class="btn btn-secondary">Назад</a>
+{% endblock %}
