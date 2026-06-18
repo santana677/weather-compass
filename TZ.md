@@ -71,5 +71,3 @@
 - **Analytics:** Matplotlib
 - **Frontend:** Bootstrap 5 (адаптивный дизайн)
 - **Deployment:** PythonAnywhere
-
-## 7. Изменения в ходе реализации
